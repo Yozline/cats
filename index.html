@@ -5,9 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
-    <title>Cats base</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css" integrity="sha512-HHsOC+h3najWR7OKiGZtfhFIEzg5VRIPde0kB0bG2QRidTQqf+sbfcxCTB16AcFB93xMjnBIKE29/MjdzXE+qw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Cats show</title>
+    
+    <script src="js/func.js"></script>
 </head>
 <body>
-    <script href="js/script.js"></script>
+    <div class="sidebar">  
+        <div class="btn">
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="btn" onclick="localStorage.removeItem('cats'); location.reload()">
+            <i class="fa-solid fa-arrows-rotate"></i>
+        </div>
+    </div>
+    <div class="content">
+        
+    </div>
+    
+    <script src="js/script.js" type="module"></script>
 </body>
 </html>

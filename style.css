@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #C5CCD9;
+    display: grid;
+    gap: 25px;
+    grid-template-columns: 800px;
+    padding: 25px;
+    /* height: 90vh; */
+    padding: 50px calc(50% - 420px);
+}
+
+.sidebar {
+    background-color: #A3AAB8;
+    border-radius: 10px;
+    display: flex;
+    padding: 15px;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #C1C7D4;
+    box-shadow: 0 0 5px 0 black;
+    display: flex;
+    flex-direction: column;    
+    justify-content: center;
+    text-align: center;
+    font-size: 25px;
+}
+
+.content {
+    background-color: #A3AAB8;    
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+        
+    box-sizing: border-box;
+
+}
+
+.card {
+    box-shadow: 0 0 5px 0 black;
+    border-radius: 10px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 70px auto;
+    gap: 14px 20px;
+}
+.card>.pic {
+    width: 70px;
+    /* height: 70px; */
+    background-color: silver;
+    border-radius: 8px;
+    grid-row-end: span 2;
+    background-size: cover;
+    background-position: center;
+}
+.card>.name {
+    grid-column-end: span 2;
+    font-size: 24px;
+}
+.card>.age {
+    font-size: 2rem;
+    justify-self: center;
+}
+.card>.rate {
+    font-size: 15px;
+    display: flex;
+    justify-self: center;
+}
+
+.favourite {
+    position: absolute;
+    margin-left: 190px;
+    margin-top: -10px;
+}
