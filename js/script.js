@@ -12,19 +12,34 @@ if(!user) {
 var api = new Api(user);
 
 
-const content = document.querySelector(".content");
+const container = document.querySelector(".container");
 const btn = document.querySelector(".sidebar").firstElementChild;
 const popupList = document.querySelectorAll(".popup");
 const popBox = document.querySelector(".popup-wrapper");
+const deleteCard = document.querySelector(".delete");
+const editbtn = document.querySelector(".edit");
 
-let catsList = localStorage.getItem("cats");
-if(catsList) {
-    catsList = JSON.parse(catsList);
-}
-console.log(catsList);
+deleteCard.addEventListener("click", function(e) {
+    console.log("dataset.id: "+deleteCard.dataset.id)
+    deletedCard(api, deleteCard.dataset.id);
+});
+
+console.log(getCatsList());
+
+const addForm = document.forms.add;
+addForm.addEventListener("submit", function(e) {
+    console.log(getCatsList());
+    addCat(e, api, Array.from(popupList), getCatsList());
+});
 
 
-if(!catsList) {
+const editForm = document.forms.edit;
+editForm.addEventListener("submit", function(e) {
+    console.log(getCatsList());
+    updCat(e, api, editbtn.dataset.id);
+});
+
+if(!getCatsList()) {
     api.getCats()
     .then(res => res.json())
     .then(data => {
@@ -32,21 +47,30 @@ if(!catsList) {
         if (data.message === "ok") {
             localStorage.setItem("cats", JSON.stringify(data.data));
             data.data.forEach(cat => {
-                createCard(cat, content, Array.from(popupList));
+                createCard(api, cat, container, Array.from(popupList));
             });
         } else {
-            showPopup(Array.from(popupList), "info", data.message);
+            showPopup(api, Array.from(popupList), "info", data.message);
         }
     });
 } else {
-    catsList.forEach(cat => {
-        createCard(cat,content, Array.from(popupList));
+    getCatsList().forEach(cat => {
+        createCard(api, cat,container, Array.from(popupList));
     });
 }
 
-btn.addEventListener("click", e => {
-    showPopup(Array.from(popupList), "add");
+editbtn.addEventListener("click", e => {
+    popupList.forEach(p => {
+            p.classList.remove("active");
+    });
+    showPopup(api, Array.from(popupList), "edit");
 });
+
+btn.addEventListener("click", e => {
+    showPopup(api, Array.from(popupList), "add");
+});
+
+
 
 popupList.forEach(p => {
     p.firstElementChild.addEventListener("click", e => {

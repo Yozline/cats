@@ -1,6 +1,19 @@
 const f = x => ( (x.toString().includes('.')) ? (x.toString().split('.').pop().length) : (0) );
 
-const createCard = (data, parent, arr) => {
+const deletedCard = (api, id) => {
+    api.delCat(id)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.message);
+            if(data.message === "ok") {
+                localStorage.removeItem('cats');
+                location.reload();
+                document.querySelector(".popup-wrapper").classList.remove("active");
+            }
+        })
+}
+
+const createCard = (api, data, parent, arr) => {
     const card = document.createElement("div");
     card.className = "card";
     // card.setAttribute("data-id", data.id);
@@ -58,21 +71,23 @@ const createCard = (data, parent, arr) => {
     if(data.favourite) favourite.innerHTML = `<i class="fa-solid fa-heart"></i>`;
 
     card.append(pic, age, rate, name,favourite);
-
+    
     card.addEventListener("click", function() {
-        showPopup(arr, "card", data);
+        console.log("arr: "+arr);
+        showPopup(api, arr, "card", data);
     });
 
     parent.append(card);
 }
 
-const showPopup = (list, type, content) => {
+const showPopup = (api, list, type, content) => {
+    console.log("list: "+list); 
     let el = list.filter(el => el.dataset.type === type)[0];
-            
+    console.log(el);
     switch (type) {
         case "card": 
         {
-            const parent = document.querySelector(".contentPopup");
+            const parent = document.querySelector(".content");
             let elems;
             elems = document.querySelector(".picPopup");
             if(elems) elems.remove();
@@ -87,6 +102,7 @@ const showPopup = (list, type, content) => {
             elems = document.querySelector(".favouritePopup");
             if(elems) elems.remove();
 
+            
             const pic = document.createElement("div");
             pic.className = "picPopup";
             pic.style.backgroundImage = `url(${content.img_link || "https://avatanplus.com/files/resources/mid/5c133ffd531c3167ab31f59c.png"})`;
@@ -115,12 +131,115 @@ const showPopup = (list, type, content) => {
             favourite.innerText = "Любимчик: "+string;
 
             parent.append(pic,  name, age, rate, favourite, description);
+            
+            const deleteCard = document.querySelector(".delete");
+            deleteCard.dataset.id = content.id;
+
+            const editCard = document.querySelector(".edit");
+            editCard.dataset.id = content.id;
+
+
         }
         case "info":
-        case "form":
-    }
+            {
+                let elems;
+                elems = document.querySelector(".errorPopup");
+                if(elems) elems.remove();
 
-    
+                const parent = document.querySelector(".error");
+
+                const error = document.createElement("div");
+                error.className = "errorPopup";
+                error.innerText = content;
+                console.log(content);
+
+                parent.append(error);
+            }
+        case "form":
+        case "edit":
+    }   
     el.classList.add("active");
     el.parentElement.classList.add("active");
 }
+
+const addCat = (e, api, popupList, store) => {
+    e.preventDefault();
+    let body = {};
+    for(let i = 0; i < e.target.elements.length; i++) {
+        let el = e.target.elements[i];
+        if(el.name) {
+            if(el.type === "checkbox") {
+                body[el.name] = el.checked;
+            } else if(el.value) {
+                body[el.name] = el.value;
+            }
+        }
+    }
+    
+    api.addCat(body)
+        .then(res => res.json())
+        .then(data => {
+            console.log("data.message: "+data.message);
+            if(data.message === "ok") {
+                const popupList = document.querySelectorAll(".popup");
+                const popBox = document.querySelector(".popup-wrapper");
+                createCard(api,body,document.querySelector(".container"), Array.from(popupList));
+                console.log("store: "+store);
+                console.log("body: "+body);
+                store.push(body);
+                localStorage.setItem("cats", JSON.stringify(store));
+                e.target.reset();
+
+                
+
+                popupList.forEach(p => {
+                        p.classList.remove("active");
+                        popBox.classList.remove("active");
+                });
+            }
+            else { 
+                popupList.forEach(p => {
+                        p.classList.remove("active");
+                });
+                showPopup(api, popupList, "info", data.message);
+            }
+        })
+}
+
+const updCat = (e, api, id) => {
+    e.preventDefault();
+    let body = {};
+    for(let i = 0; i < e.target.elements.length; i++) {
+        let el = e.target.elements[i];
+        if(el.name) {
+            if(el.type === "checkbox") {
+                body[el.name] = el.checked;
+            } else if(el.value) {
+                body[el.name] = el.value;
+            }
+        }
+    }
+    
+    api.updCat(id, body)
+        .then(res => res.json())
+        .then(data => {
+            console.log("data.message: "+data.message);
+            const popupList = document.querySelectorAll(".popup");
+            const popBox = document.querySelector(".popup-wrapper");
+            if(data.message === "ok") {
+                localStorage.removeItem('cats');
+                location.reload();
+                document.querySelector(".popup-wrapper").classList.remove("active");
+            }
+            else showPopup(api, popupList, "info", data.message);
+        })
+}
+
+const getCatsList = () => {
+    let catsList = localStorage.getItem("cats");
+    if(catsList) {
+       return catsList = JSON.parse(catsList);
+    }
+    else return false;
+}
+

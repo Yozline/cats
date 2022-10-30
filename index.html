@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css" integrity="sha512-HHsOC+h3najWR7OKiGZtfhFIEzg5VRIPde0kB0bG2QRidTQqf+sbfcxCTB16AcFB93xMjnBIKE29/MjdzXE+qw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css"
+        integrity="sha512-HHsOC+h3najWR7OKiGZtfhFIEzg5VRIPde0kB0bG2QRidTQqf+sbfcxCTB16AcFB93xMjnBIKE29/MjdzXE+qw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Cats show</title>
-    
+
     <script src="js/func.js"></script>
 </head>
+
 <body>
-    <div class="sidebar">  
+    <div class="sidebar">
         <div class="btn">
             <i class="fa-solid fa-plus"></i>
         </div>
-        <div class="btn clean" onclick="localStorage.removeItem('cats'); location.reload();">
+        <div class="btn" onclick="localStorage.removeItem('cats'); location.reload();">
             <i class="fa-solid fa-arrows-rotate"></i>
         </div>
     </div>
-    <div class="content"></div>
+    <div class="container"></div>
 
     <div class="popup-wrapper">
         <div class="popup" data-type="card">
@@ -32,11 +36,90 @@
             <div class="edit">
                 <i class="fa-solid fa-pen"></i>
             </div>
-            <div class="contentPopup"></div> 
-            
+            <div class="content"></div>
+        </div>
+        <div class="popup" data-type="add">
+            <div class="close">+</div>
+            <div class="content">
+                <h2>Добавление котика</h2>
+                <form id="add">
+                    <div class="row">
+                        <label for="i1">Имя котика</label>
+                        <input type="text" id="i1" name="name" required>
+                    </div>
+                    <div class="row">
+                        <label for="i2">Порядковый номер</label>
+                        <input type="number" id="i2" name="id" required>
+                    </div>
+                    <div class="row">
+                        <label for="i3">Ссылка на картинку</label>
+                        <input type="text" id="i3" name="img_link">
+                    </div>
+                    <div class="row">
+                        <label for="i4">Возраст</label>
+                        <input type="number" id="i4" name="age" min="0" max="100">
+                    </div>
+                    <div class="row">
+                        <label for="i5">Рейтинг (0-5, шаг 0.5)</label>
+                        <input type="range" id="i5" name="rate" min="0" max="5" value="0" step="0.5">
+                    </div>
+                    <div class="row">
+                        <label for="i6">
+                            <input type="checkbox" id="i6" name="favourite">
+                            Любимчик
+                        </label>
+                    </div>
+                    <div class="row">
+                        <label for="i7">Описание</label>
+                        <textarea id="i7" name="description"></textarea>
+                    </div>
+                    <button type="submit">Добавить котика</button>
+                </form>
+            </div>
+        </div>
+        <div class="popup" data-type="edit">
+            <div class="close">+</div>
+            <div class="content">
+                <h2>Редактирование кота</h2>
+                <form id="edit">
+                    <div class="row">
+                        <label for="i1">Имя котика</label>
+                        <input type="text" id="i1" name="name" required>
+                    </div>
+                    <div class="row">
+                        <label for="i3">Ссылка на картинку</label>
+                        <input type="text" id="i3" name="img_link">
+                    </div>
+                    <div class="row">
+                        <label for="i4">Возраст</label>
+                        <input type="number" id="i4" name="age" min="0" max="100">
+                    </div>
+                    <div class="row">
+                        <label for="i5">Рейтинг (0-5, шаг 0.5)</label>
+                        <input type="range" id="i5" name="rate" min="0" max="5" value="0" step="0.5">
+                    </div>
+                    <div class="row">
+                        <label for="i6">
+                            <input type="checkbox" id="i6" name="favourite">
+                            Любимчик
+                        </label>
+                    </div>
+                    <div class="row">
+                        <label for="i7">Описание</label>
+                        <textarea id="i7" name="description"></textarea>
+                    </div>
+                    <button type="submit">Отредактировать котика</button>
+                </form>
+            </div>
+        </div>
+        <div class="popup" data-type="info">
+            <div class="close">+</div>
+            <div class="content error">
+                <h2>Внимание!</h2>
+            </div>
         </div>
     </div>
-    
     <script src="js/script.js" type="module"></script>
 </body>
+
 </html>

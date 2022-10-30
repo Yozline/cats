@@ -32,7 +32,7 @@ body {
     font-size: 25px;
 }
 
-.content {
+.container {
     background-color: #D6C43C;    
     border-radius: 10px;
     display: grid;
@@ -144,8 +144,8 @@ body {
     justify-content: center;
     align-items: center;
     line-height: 1;
-    top: 280px;
-    right: -10px;
+    top: -10px;
+    left: -10px;
     cursor: pointer;
 }
 .popup>.edit {
@@ -161,8 +161,8 @@ body {
     justify-content: center;
     align-items: center;
     line-height: 1;
-    top: 280px;
-    right: 30px;
+    top: -10px;
+    left: 30px;
     cursor: pointer;
 }
 .popup.active {
@@ -183,13 +183,6 @@ form {
     gap: 6px;
 }
 
-h2 {
-    margin: 0;
-}
-
-.popup h2 {
-    margin-bottom: 30px;
-}
 .picPopup {
     width: 200px;
     height: 200px;
@@ -199,7 +192,7 @@ h2 {
     grid-row-end: span 4;
     
 }
-.contentPopup {
+.content {
     display: grid;
     grid-template-columns: 200px auto;
     position: relative;
