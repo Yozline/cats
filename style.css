@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: sans-serif;
-    background-color: #C5CCD9;
+    background-color: #3979FA;
     display: grid;
     gap: 25px;
     grid-template-columns: 800px;
@@ -11,7 +11,7 @@ body {
 }
 
 .sidebar {
-    background-color: #A3AAB8;
+    background-color: #D6C43C;
     border-radius: 10px;
     display: flex;
     padding: 15px;
@@ -23,7 +23,7 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    background-color: #C1C7D4;
+    background-color: #73ED4E;
     box-shadow: 0 0 5px 0 black;
     display: flex;
     flex-direction: column;    
@@ -33,15 +33,13 @@ body {
 }
 
 .content {
-    background-color: #A3AAB8;    
+    background-color: #D6C43C;    
     border-radius: 10px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     padding: 20px;
-        
     box-sizing: border-box;
-
 }
 
 .card {
@@ -51,11 +49,13 @@ body {
     display: grid;
     grid-template-columns: 70px auto;
     gap: 14px 20px;
+    background-color: #73ED4E;
+    position: relative;
 }
 .card>.pic {
     width: 70px;
     /* height: 70px; */
-    background-color: silver;
+    background-color: #D6C43C;
     border-radius: 8px;
     grid-row-end: span 2;
     background-size: cover;
@@ -77,6 +77,147 @@ body {
 
 .favourite {
     position: absolute;
-    margin-left: 190px;
-    margin-top: -10px;
+    right: 0px;
+    padding: 10px 15px;
+    /* margin-top: -10px; */
+}
+
+.btn:hover {
+    transform: scale(1.1,1.1);
+    cursor: pointer;
+}
+.card:hover {
+    cursor: pointer;
+    transform: scale(1.05,1.05);
+}
+
+.popup-wrapper {
+    position: fixed;
+    background-color: #2224;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(2px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.popup {
+    padding: 30px;
+    background-color: #73ED4E;
+    width: 500px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    position: relative;
+    display: none;    
+    box-shadow: 0 0 5px 0 black;
+}
+.popup>.close {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px 0 black;
+    background-color: #D6C43C;
+    color: black;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    transform: rotate(45deg);
+    top: -10px;
+    right: -10px;
+    cursor: pointer;
+}
+.popup>.delete {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px 0 black;
+    background-color: #D6C43C;
+    color: black;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    top: 280px;
+    right: -10px;
+    cursor: pointer;
+}
+.popup>.edit {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px 0 black;
+    background-color: #D6C43C;
+    color: black;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    top: 280px;
+    right: 30px;
+    cursor: pointer;
+}
+.popup.active {
+    display: grid;
+}
+.popup-wrapper.active {
+    display: flex;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+h2 {
+    margin: 0;
+}
+
+.popup h2 {
+    margin-bottom: 30px;
+}
+.picPopup {
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    grid-row-end: span 4;
+    
+}
+.contentPopup {
+    display: grid;
+    grid-template-columns: 200px auto;
+    position: relative;
+    gap: 20px;
+}
+.namePopup {
+    font-size: 26px;
+}
+.agePopup  {
+    font-size: 20px;
+}
+.ratePopup {
+    font-size: 20px;
+}
+.favouritePopup {
+    font-size: 20px;
+}
+.descriptionPopup {
+    grid-column-end: span 2;
+    font-size: 20px;
 }

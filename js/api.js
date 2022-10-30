@@ -21,24 +21,22 @@ class Api {
             },
             body: JSON.stringify(body)
         });
+    }    
+    updCat(id, body) {
+        return fetch(`${this.path}${this.name}/update/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(body)
+        });
     }
-
-    
-    // updCat(id, body) {
-    //     return fetch(`${this.path}${this.name}/update/${id}`, {
-    //         method: "PUT",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Accept": "application/json"
-    //         },
-    //         body: JSON.stringify(body)
-    //     });
-    // }
-    // delCat(id) {
-    //     return fetch(`${this.path}${this.name}/delete/${id}`, {
-    //         method: "DELETE"
-    //     });
-    // }
+    delCat(id) {
+        return fetch(`${this.path}${this.name}/delete/${id}`, {
+            method: "DELETE"
+        });
+    }
 }
 
 export default Api;

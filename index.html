@@ -15,12 +15,26 @@
         <div class="btn">
             <i class="fa-solid fa-plus"></i>
         </div>
-        <div class="btn" onclick="localStorage.removeItem('cats'); location.reload()">
+        <div class="btn clean" onclick="localStorage.removeItem('cats'); location.reload();">
             <i class="fa-solid fa-arrows-rotate"></i>
         </div>
     </div>
-    <div class="content">
-        
+    <div class="content"></div>
+
+    <div class="popup-wrapper">
+        <div class="popup" data-type="card">
+            <div class="close">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+            <div class="delete">
+                <i class="fa-solid fa-trash"></i>
+            </div>
+            <div class="edit">
+                <i class="fa-solid fa-pen"></i>
+            </div>
+            <div class="contentPopup"></div> 
+            
+        </div>
     </div>
     
     <script src="js/script.js" type="module"></script>
