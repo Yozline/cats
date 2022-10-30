@@ -28,14 +28,12 @@ console.log(getCatsList());
 
 const addForm = document.forms.add;
 addForm.addEventListener("submit", function(e) {
-    console.log(getCatsList());
     addCat(e, api, Array.from(popupList), getCatsList());
 });
 
 
 const editForm = document.forms.edit;
 editForm.addEventListener("submit", function(e) {
-    console.log(getCatsList());
     updCat(e, api, editbtn.dataset.id);
 });
 
@@ -63,7 +61,7 @@ editbtn.addEventListener("click", e => {
     popupList.forEach(p => {
             p.classList.remove("active");
     });
-    showPopup(api, Array.from(popupList), "edit");
+    showPopup(api, Array.from(popupList), "edit", editbtn.dataset.id);
 });
 
 btn.addEventListener("click", e => {
@@ -76,7 +74,19 @@ popupList.forEach(p => {
     p.firstElementChild.addEventListener("click", e => {
         p.classList.remove("active");
         popBox.classList.remove("active");
-    });
+        let input1 = document.getElementById("e1");
+        input1.value = "";
+        let input2 = document.getElementById("e2");
+        input2.value = "";
+        let input3 = document.getElementById("e3");
+        input3.value = ""
+        let input4 = document.getElementById("e4");
+        input4.value = 0;
+        let input5 = document.getElementById("e5");
+        input5.checked = 0;
+        let input6 = document.getElementById("e6");
+        input6.value = "";
+    }); 
 });
 
 popBox.addEventListener("click", function(e) {
@@ -87,5 +97,17 @@ popBox.addEventListener("click", function(e) {
                 p.classList.remove("active");
             }
         })
+        let input1 = document.getElementById("e1");
+        input1.value = "";
+        let input2 = document.getElementById("e2");
+        input2.value = "";
+        let input3 = document.getElementById("e3");
+        input3.value = ""
+        let input4 = document.getElementById("e4");
+        input4.value = 0;
+        let input5 = document.getElementById("e5");
+        input5.checked = 0;
+        let input6 = document.getElementById("e6");
+        input6.value = "";
     }
 });

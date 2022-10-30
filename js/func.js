@@ -155,8 +155,39 @@ const showPopup = (api, list, type, content) => {
 
                 parent.append(error);
             }
-        case "form":
+        // case "form":
         case "edit":
+            { 
+                api.getCat(content)
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("data.message: "+data.message);
+                        if(data.message === "ok") {
+                            console.log(data);
+                            let input1 = document.getElementById("e1");
+                            input1.value = data.data.name;
+                            let input2 = document.getElementById("e2");
+                            input2.value = data.data.img_link;
+                            let input3 = document.getElementById("e3");
+                            input3.value = data.data.age;
+                            let input4 = document.getElementById("e4");
+                            input4.value = data.data.rate;
+                            let input5 = document.getElementById("e5");
+                            input5.checked = data.data.favourite;
+                            let input6 = document.getElementById("e6");
+                            input6.value = data.data.description;
+                        }
+                        // else { 
+                        //     popupList.forEach(p => {
+                        //             p.classList.remove("active");
+                        //     });
+                        //     showPopup(api, popupList, "info", data.message);
+                        // }
+                    })
+            }
+                
+                // console.log(infoCat);
+
     }   
     el.classList.add("active");
     el.parentElement.classList.add("active");
