@@ -5,6 +5,8 @@ console.log("u", user);
 if(!user) {
     user = prompt("Пользователь не найден, укажите имя пользователя", "yozline");
     document.cookie = `user=${user}`;
+    localStorage.removeItem('cats');
+    location.reload();
 } else {
     user = user.split("=")[1]
 }
